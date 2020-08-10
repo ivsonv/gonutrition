@@ -2,27 +2,48 @@ import React from 'react';
 
 import './styles.css';
 
-function ProfileItem() {
+export interface Profiler {
+    avatar: string;
+    bio: string;
+    cost: number;
+    id: number;
+    name: string;
+    subject: string;
+    whatsapp: number;
+}
+
+interface ProfilerItemProps {
+    profiler: Profiler;
+}
+
+const ProfileItem: React.FC<ProfilerItemProps> = ({ profiler }: ProfilerItemProps) => {
     return (
         <article className="profile-item">
             <header>
-                <img src="https://http2.mlstatic.com/foto-desenho-para-o-seu-perfil-das-redes-sociais-D_NQ_NP_614041-MLB27185740295_042018-O.jpg" alt="Foto perfil" />
+                <img src={profiler.avatar} alt={profiler.name} />
                 <div>
-                    <strong>IVSON VITAL</strong>
-                    <span>Nutrição esportiva, parenteal, crianças...</span>
+                    <strong>{profiler.name}</strong>
+                    <span>{profiler.subject}</span>
                 </div>
             </header>
             <p>
-                aoisdoasjdosajidiasod a sodajsodiajs  paoskpjas  daosjdias dipasj iodaj sodija osdi aos dhoasu dho ashduo
+                {profiler.bio}
             </p>
             <footer>
                 <p>
                     Preço/Hora
-                <strong>R$ 90,00</strong>
+                <strong>R$ {profiler.cost}</strong>
                 </p>
                 <button type="button">
                     Marcar Horário
-            </button>
+                </button>
+                {/* <a 
+                    target="_blank" 
+                    onClick={createNewConnection} 
+                    href={`https://wa.me/${teacher.whatsapp}`} 
+                    type="button"
+                    ></a> 
+                */}
             </footer>
         </article>
     );

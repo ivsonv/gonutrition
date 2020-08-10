@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Header from '../../components/Header';
 import Input from '../../components/Input';
@@ -18,10 +19,11 @@ function ProfileRegister() {
     const [subject, setSubject] = useState('');
     const [cost, setCost] = useState('');
 
-
     const [scheduleItems, setScheduleItems] = useState([
         { week_day: 0, from: '', to: '' }
     ]);
+
+    const history = useHistory();
 
     function AddScheduleItem() {
         setScheduleItems([
@@ -42,6 +44,8 @@ function ProfileRegister() {
         Api.post('/classes', req)
             .then(res => {
                 alert('cadastro realizado com sucesso!');
+
+                history.push('/');
             })
             .catch(err => {
                 alert('Erro de cadastro');
