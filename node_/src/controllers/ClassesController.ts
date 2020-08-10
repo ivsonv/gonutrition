@@ -48,9 +48,7 @@ export default class ClassesController {
 			});
 
 			await trx('class_schedule').insert(classSchedule);
-
 			await trx.commit();
-
 			return response.json({ sucess: true });
 		} catch (error) {
 			await trx.rollback();
