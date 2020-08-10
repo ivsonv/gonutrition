@@ -1,0 +1,43 @@
+#page-profile-list {
+    width: 100vw;
+    height: 100vh;
+}
+
+#profile-search {
+    margin-top: 3.2rem;
+}
+
+#profile-search .input-block label,
+#profile-search .select-block label {
+    color: var(--color-text-in-primary);
+}
+
+#page-profile-list main {
+    margin: 3.2rem auto;
+    width: 90%;
+}
+
+@media (min-width: 700px) {
+    #page-profile-list {
+        max-width: 100%;
+    }
+
+    #profile-search {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 15px;
+        position: absolute;
+        bottom: -25px;
+    }
+
+    #profile-search .input-block + .input-block,
+    #profile-search .select-block + .select-block {
+        margin-top: 0;
+    }
+
+    #page-profile-list main {
+        padding: 3.2rem 0;
+        max-width: 740px;
+        margin: 0 auto;
+    }
+}
