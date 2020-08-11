@@ -20,17 +20,17 @@ function ProfileList() {
   const [week_day, setweek_day] = useState('1');
   const [time, setTime] = useState('11:00');
 
-  const [teachers, setTeachers] = useState([]);
+  const [profiles, setprofiles] = useState([]);
 
   function loadFavorites() {
     AsyncStorage.getItem('favorites').then(response => {
       if (response) {
-        const favoritedTeachers = JSON.parse(response);
-        const favoritedTeachersIds = favoritedTeachers.map((teacher: Profiler) => {
+        const favoritedprofiles = JSON.parse(response);
+        const favoritedprofilesIds = favoritedprofiles.map((teacher: Profiler) => {
           return teacher.id;
         });
 
-        setFavorites(favoritedTeachersIds);
+        setFavorites(favoritedprofilesIds);
       }
     });
   }
@@ -43,7 +43,7 @@ function ProfileList() {
       }
     }).then(res => {
       setIsFiltersVisible(false);
-      setTeachers(res.data);
+      setprofiles(res.data);
     })
   }, []);
 
@@ -69,7 +69,7 @@ function ProfileList() {
     });
 
     setIsFiltersVisible(false);
-    setTeachers(response.data);
+    setprofiles(response.data);
   }
 
   return (
@@ -134,7 +134,7 @@ function ProfileList() {
           paddingBottom: 16,
         }}
       >
-        {teachers.map((_profile: Profiler) => (
+        {profiles.map((_profile: Profiler) => (
           <ProfileItem
             key={_profile.id}
             profile={_profile}
