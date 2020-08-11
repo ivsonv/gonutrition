@@ -9,7 +9,7 @@ interface ScheduleItem {
 }
 
 export default class ClassesController {
-	async create(request: Request, response: Response): Promise<Response> {
+	async create(request: Request, response: Response) {
 		const {
 			name,
 			avatar,
@@ -59,7 +59,7 @@ export default class ClassesController {
 		}
 	}
 
-	async index(request: Request, response: Response): Promise<Response> {
+	async index(request: Request, response: Response) {
 		const filters = request.query;
 
 		const subject = filters.subject as string;
@@ -67,7 +67,7 @@ export default class ClassesController {
 		const time = filters.time as string;
 
 		if (!filters.week_day || !filters.subject || !filters.time) {
-			return response.status(400).json({
+			return response.json({
 				error: 'Missing filters to search classes.',
 			});
 		}
@@ -86,6 +86,6 @@ export default class ClassesController {
 			.join('users', 'classes.user_id', '=', 'users.id')
 			.select(['classes.*', 'users.*']);
 
-		return response.send(classes);
+		return response.json(classes);
 	}
 }

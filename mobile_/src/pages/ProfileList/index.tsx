@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
@@ -16,9 +16,9 @@ function ProfileList() {
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
   const [favorites, setFavorites] = useState<number[]>([]);
 
-  const [subject, setSubject] = useState('');
-  const [week_day, setweek_day] = useState('');
-  const [time, setTime] = useState('');
+  const [subject, setSubject] = useState('Programacao');
+  const [week_day, setweek_day] = useState('1');
+  const [time, setTime] = useState('11:00');
 
   const [teachers, setTeachers] = useState([]);
 
@@ -34,6 +34,18 @@ function ProfileList() {
       }
     });
   }
+  useEffect(() => {
+    api.get('/classes', {
+      params: {
+        subject,
+        week_day,
+        time,
+      }
+    }).then(res => {
+      setIsFiltersVisible(false);
+      setTeachers(res.data);
+    })
+  }, []);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -48,7 +60,7 @@ function ProfileList() {
   async function handleFiltersSubmit() {
     loadFavorites();
 
-    const response = await api.get('classes', {
+    const response = await api.get('/classes', {
       params: {
         subject,
         week_day,
@@ -116,7 +128,7 @@ function ProfileList() {
       </PageHeader>
 
       <ScrollView
-        style={styles.teacherList}
+        style={styles.profileList}
         contentContainerStyle={{
           paddingHorizontal: 16,
           paddingBottom: 16,

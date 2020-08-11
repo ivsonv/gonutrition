@@ -44,8 +44,8 @@ const ProfileItem: React.FC<ProfileItemProps> = ({ profile, favorited }: Profile
     }
 
     if (isFavorited) {
-      const favoriteIndex = favoritesArray.findIndex((teacherItem: Profiler) => {
-        return teacherItem.id === profile.id;
+      const favoriteIndex = favoritesArray.findIndex((profileitem: Profiler) => {
+        return profileitem.id === profile.id;
       });
       favoritesArray.splice(favoriteIndex, 1);
       setIsFavorited(false);
